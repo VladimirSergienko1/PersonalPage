@@ -1,0 +1,44 @@
+---
+const links = [
+  { name: 'Главная', url: '/' },
+  { name: 'О нас', url: '/about' },
+];
+
+// Определяем активную ссылку
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 left-0 right-0">
+  <!-- Стеклянный эффект фона -->
+  <nav
+    class="inset-0 bg-white/10 backdrop-blur-md outline-2 outline-white max-w-[1400px] mx-auto px-4 py-3 my-3 rounded-2xl"
+  >
+    <div class="relative z-10 flex justify-between items-center">
+      <!-- Лого -->
+      <a href="/" class="text-xl font-bold"> Logo </a>
+
+      <ul class="flex gap-8 items-center">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.url}
+                class:list={[
+                  'text-base hover:text-white transition-colors duration-200',
+                  'text-sm font-medium',
+                  currentPath === link.url && 'text-red font-semibold',
+                ]}
+              >
+                {link.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<style>
+  /* Дополнительные стили можно добавить здесь если нужно */
+</style>
